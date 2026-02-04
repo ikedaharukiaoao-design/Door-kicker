@@ -31,33 +31,40 @@
         }
 
         /* --- スタッツ (左上) --- */
+        /* 文字サイズを vmin に変更 */
         #stats-area {
-            position: absolute; top: 20px; left: 20px; z-index: 100;
-            text-align: left; font-size: 14px; line-height: 1.4;
-            text-shadow: 2px 2px 0 #000; pointer-events: none;
+            position: absolute; top: 2vmin; left: 2vmin; z-index: 100;
+            text-align: left; font-size: 2.5vmin; line-height: 1.4;
+            text-shadow: 0.3vmin 0.3vmin 0 #000; pointer-events: none;
         }
-        .stat-row { display: flex; align-items: center; gap: 8px; }
-        .stat-label { width: 70px; font-style: italic; opacity: 0.8; }
-        .stat-val { font-family: monospace; font-size: 18px; font-weight: bold; }
+        .stat-row { display: flex; align-items: center; gap: 1vmin; }
+        .stat-label { width: 12vmin; font-style: italic; opacity: 0.8; }
+        .stat-val { font-family: monospace; font-size: 3.5vmin; font-weight: bold; }
         #stat-perfect { color: #00ffff; }
         #stat-great { color: #ffeb3b; }
         #stat-good { color: #ffffff; }
 
         /* --- 中央スコア --- */
-        #ui-area { flex: 0 0 auto; margin-top: 40px; z-index: 10; pointer-events: none; }
-        #score-label { font-size: 14px; color: #aaa; letter-spacing: 2px; }
-        #score { font-size: 60px; margin: 0; letter-spacing: -2px; text-shadow: 0 0 20px rgba(0,0,0,0.8); line-height: 1; }
-        #level { font-size: 12px; color: #888; letter-spacing: 2px; margin-top: 5px; }
+        #ui-area { flex: 0 0 auto; margin-top: 5vh; z-index: 10; pointer-events: none; }
+        #score-label { font-size: 3vmin; color: #aaa; letter-spacing: 0.5vmin; }
+        #score { 
+            font-size: 15vmin; /* 画面に合わせて巨大化 */
+            margin: 0; letter-spacing: -0.5vmin; 
+            text-shadow: 0 0 4vmin rgba(0,0,0,0.8); line-height: 1; 
+        }
+        #level { font-size: 2.5vmin; color: #888; letter-spacing: 0.5vmin; margin-top: 1vmin; }
 
         /* --- 判定バー --- */
         #bar-wrapper {
             flex: 0 0 auto; width: 100%; display: flex; justify-content: center;
-            margin: 20px 0 10px 0; position: relative; z-index: 20;
+            margin: 3vh 0 2vh 0; position: relative; z-index: 20;
         }
         #bar-container { 
-            position: relative; width: 85%; height: 40px; background: #222; 
-            border: 2px solid #555; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            position: relative; width: 85%; 
+            height: 7vmin; /* 太さも自動調整 */
+            background: #222; 
+            border: 0.5vmin solid #555; border-radius: 4vmin; overflow: hidden;
+            box-shadow: 0 0 2vmin rgba(0,0,0,0.5);
         }
         #target-zone { 
             position: absolute; left: 40%; width: 20%; height: 100%; 
@@ -66,30 +73,31 @@
         }
         #cursor { 
             position: absolute; left: 0%; 
-            width: 4px; height: 100%; 
-            background: #fff; box-shadow: 0 0 10px white; z-index: 5;
+            width: 1vmin; height: 100%; 
+            background: #fff; box-shadow: 0 0 2vmin white; z-index: 5;
         }
 
         /* --- 3Dドアエリア --- */
         #door-area {
             flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
             position: relative; 
-            perspective: 600px;
-            margin-bottom: 40px; z-index: 10;
+            perspective: 100vmin; /* 奥行きも画面サイズ依存に */
+            margin-bottom: 5vh; z-index: 10;
         }
         
         #door-frame { 
-            width: 220px; height: 360px; 
+            /* ここが重要：vminを使って画面サイズに合わせて伸縮させる */
+            width: 35vmin; height: 60vmin; 
             background: #1a100c; 
-            border: 12px solid #3e2723; border-bottom: none; 
+            border: 2vmin solid #3e2723; border-bottom: none; 
             position: relative; 
-            box-shadow: inset 0 0 30px #000, 0 20px 50px rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 5vmin #000, 0 4vmin 8vmin rgba(0,0,0,0.8);
         }
         
         #door-void {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #000;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 4vmin rgba(0,0,0,0.8);
         }
 
         #door-group { 
@@ -97,7 +105,6 @@
             position: relative;
             transform-style: preserve-3d;
             transform-origin: left; 
-            /* 初期状態：半開き */
             transform: rotateY(-35deg); 
             transition: transform 0.1s cubic-bezier(0.1, 0.7, 1.0, 0.1);
         }
@@ -105,46 +112,47 @@
         .door-face {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #5d4037;
-            border: 1px solid #4e342e;
+            border: 0.2vmin solid #4e342e;
             display: flex; align-items: center; justify-content: center;
             backface-visibility: hidden;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+            box-shadow: inset 0 0 4vmin rgba(0,0,0,0.3);
         }
         
         .panel {
-            width: 70%; height: 80%; border: 4px solid #4a332a;
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3), 1px 1px 0 rgba(255,255,255,0.1);
+            width: 70%; height: 80%; border: 0.8vmin solid #4a332a;
+            box-shadow: inset 0.4vmin 0.4vmin 1vmin rgba(0,0,0,0.3), 0.2vmin 0.2vmin 0 rgba(255,255,255,0.1);
         }
 
         .door-side {
             position: absolute; top: 0; right: 0;
-            width: 25px; height: 100%;
+            width: 4vmin; height: 100%;
             background: #3e2723;
             transform-origin: right;
             transform: rotateY(90deg);
         }
 
         .knob { 
-            position: absolute; right: 20px; top: 50%; width: 22px; height: 22px; 
+            position: absolute; right: 3vmin; top: 50%; width: 4vmin; height: 4vmin; 
             background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
-            border-radius: 50%; box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-            transform: translateZ(2px);
+            border-radius: 50%; box-shadow: 0.5vmin 0.5vmin 1vmin rgba(0,0,0,0.4);
+            transform: translateZ(0.5vmin);
         }
 
         /* --- エフェクト --- */
         .pop-text {
-            position: absolute; top: -50px; left: 50%; transform: translateX(-50%);
-            font-size: 50px; font-weight: 900; font-style: italic;
+            position: absolute; top: -10vmin; left: 50%; transform: translateX(-50%);
+            font-size: 10vmin; font-weight: 900; font-style: italic;
             pointer-events: none; z-index: 100;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            text-shadow: 0 0 2vmin rgba(0,0,0,0.8);
             animation: textPop 0.6s ease-out forwards;
+            white-space: nowrap;
         }
         @keyframes textPop {
-            0% { opacity: 0; transform: translate(-50%, 20px) scale(0.5); }
-            50% { opacity: 1; transform: translate(-50%, -10px) scale(1.3); }
-            100% { opacity: 0; transform: translate(-50%, -30px) scale(1.0); }
+            0% { opacity: 0; transform: translate(-50%, 4vmin) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -2vmin) scale(1.3); }
+            100% { opacity: 0; transform: translate(-50%, -6vmin) scale(1.0); }
         }
-        .spark { position: absolute; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; z-index: 121; }
+        .spark { position: absolute; width: 1.5vmin; height: 1.5vmin; border-radius: 50%; pointer-events: none; z-index: 121; }
         
         .shake-heavy { animation: shakeHeavy 0.4s; }
         @keyframes shakeHeavy {
@@ -166,8 +174,8 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .title-text {
-            font-size: 50px; color: #fff; text-shadow: 0 0 20px #00ffff;
-            margin-bottom: 40px; transform: rotate(-5deg); font-weight: 900;
+            font-size: 12vmin; color: #fff; text-shadow: 0 0 4vmin #00ffff;
+            margin-bottom: 8vmin; transform: rotate(-5deg); font-weight: 900;
         }
         
         /* --- ゲームオーバー画面 --- */
@@ -179,31 +187,31 @@
         #result-box {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border: 2px solid #555; border-radius: 20px;
-            padding: 30px; width: 80%; max-width: 350px;
-            margin-bottom: 30px; box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            border: 0.5vmin solid #555; border-radius: 3vmin;
+            padding: 5vmin; width: 80%; max-width: 500px;
+            margin-bottom: 5vmin; box-shadow: 0 0 5vmin rgba(0,0,0,0.8);
             text-align: center; animation: fadeIn 0.5s ease-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(4vmin); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .res-title { font-size: 16px; color: #aaa; letter-spacing: 2px; margin-bottom: 5px; }
-        .res-score { font-size: 60px; line-height: 1; margin-bottom: 20px; color: #fff; text-shadow: 0 0 15px #fff; }
+        .res-title { font-size: 4vmin; color: #aaa; letter-spacing: 0.5vmin; margin-bottom: 1vmin; }
+        .res-score { font-size: 15vmin; line-height: 1; margin-bottom: 4vmin; color: #fff; text-shadow: 0 0 3vmin #fff; }
         .res-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            text-align: left; border-top: 1px solid #444; padding-top: 15px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2vmin;
+            text-align: left; border-top: 1px solid #444; padding-top: 3vmin;
         }
-        .res-item { font-size: 14px; color: #ddd; display: flex; justify-content: space-between; }
-        .res-num { font-family: monospace; font-size: 18px; font-weight: bold; }
+        .res-item { font-size: 3.5vmin; color: #ddd; display: flex; justify-content: space-between; }
+        .res-num { font-family: monospace; font-size: 4.5vmin; font-weight: bold; }
 
         .btn {
-            padding: 20px 60px; font-size: 24px; font-weight: bold; font-family: inherit;
-            background: #00e676; color: #000; border: none; border-radius: 50px;
-            box-shadow: 0 0 20px #00e676; cursor: pointer; transition: transform 0.1s;
+            padding: 3vmin 8vmin; font-size: 5vmin; font-weight: bold; font-family: inherit;
+            background: #00e676; color: #000; border: none; border-radius: 10vmin;
+            box-shadow: 0 0 3vmin #00e676; cursor: pointer; transition: transform 0.1s;
         }
         .btn:active { transform: scale(0.95); }
-        .btn-retry { background: #ff4757; box-shadow: 0 0 20px #ff4757; color: white; }
+        .btn-retry { background: #ff4757; box-shadow: 0 0 3vmin #ff4757; color: white; }
 
     </style>
 </head>
@@ -258,7 +266,7 @@
     </div>
 
     <div id="gameover">
-        <h2 style="color:#ff4757; font-size:40px; margin: 0 0 20px 0; text-shadow:0 0 10px #ff4757;">GAME OVER</h2>
+        <h2 style="color:#ff4757; font-size:8vmin; margin: 0 0 4vmin 0; text-shadow:0 0 2vmin #ff4757;">GAME OVER</h2>
         <div id="result-box">
             <div class="res-title">FINAL SCORE</div>
             <div class="res-score" id="res-score">0</div>
@@ -272,7 +280,7 @@
     </div>
 
     <script>
-        // --- AUDIO SYSTEM (Gemini Synth) ---
+        // --- AUDIO SYSTEM ---
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         let actx = null;
         let bgmInterval = null;
@@ -313,7 +321,6 @@
 
         function playDoorCrash() {
             const t = actx.currentTime;
-            // Noise
             const bufferSize = actx.sampleRate * 1.5;
             const buffer = actx.createBuffer(1, bufferSize, actx.sampleRate);
             const data = buffer.getChannelData(0);
@@ -329,7 +336,7 @@
             noiseGain.gain.exponentialRampToValueAtTime(0.01, t + 0.5);
             noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(actx.destination);
             noise.start();
-            // Kick
+            
             const kick = actx.createOscillator();
             const kickGain = actx.createGain();
             kick.frequency.setValueAtTime(120, t);
@@ -465,11 +472,11 @@
             else countGood++;
             updateStatsUI();
 
-            playDoorCrash(); // 閉まる際の衝撃音として流用
+            playDoorCrash();
             if(type === "PERFECT") playChime();
             else if (type === "GREAT") playClick();
 
-            // 成功時: 勢いよく閉じる (0deg)
+            // 成功時: 閉じる
             doorGroup.style.transition = "0.05s cubic-bezier(0.1, 0.7, 1.0, 0.1)";
             doorGroup.style.transform = "rotateY(0deg)";
 
@@ -503,7 +510,7 @@
 
             setTimeout(() => { flashLayer.style.opacity = 0; }, 100);
 
-            // リセット: 再び半開きに戻る
+            // リセット: 再び半開き
             setTimeout(() => {
                 doorGroup.style.transition = "0.3s ease-out";
                 doorGroup.style.transform = "rotateY(-35deg)";
@@ -526,16 +533,24 @@
             const textEl = document.createElement("div");
             textEl.className = "pop-text"; textEl.innerText = text; textEl.style.color = textColor;
             barWrapper.appendChild(textEl);
+            
+            // エフェクトの位置補正（タップ位置がない場合など）
+            let tx = x || window.innerWidth / 2;
+            let ty = y || window.innerHeight / 2;
+
             const colors = sparkColor.split(',');
             for(let i=0; i<sparkCount; i++){
                 const p = document.createElement("div");
                 p.className = "spark"; p.style.background = colors[Math.floor(Math.random() * colors.length)];
-                p.style.left = x + "px"; p.style.top = y + "px";
+                p.style.left = tx + "px"; p.style.top = ty + "px";
                 document.body.appendChild(p);
                 let angle = Math.random() * Math.PI * 2;
                 let spd = (Math.random() * 10 + 5) * (burstScale > 1.5 ? 1.5 : 1);
+                // 画面サイズに応じて飛び散る距離を調整
+                spd *= (window.innerHeight < 600 ? 0.6 : 1);
+                
                 let dx = Math.cos(angle) * spd; let dy = Math.sin(angle) * spd;
-                let op = 1; let px = x, py = y;
+                let op = 1; let px = tx, py = ty;
                 const anim = setInterval(()=>{
                     px += dx; py += dy; op -= 0.05;
                     p.style.left = px+"px"; p.style.top = py+"px"; p.style.opacity = op;
